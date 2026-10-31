@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">Bandera de México</title>
+  <desc id="desc">Tres franjas verticales verde, blanca y roja con el escudo nacional estilizado al centro.</desc>
+  <path fill="#006847" d="M0 0h300v600H0z"/><path fill="#fff" d="M300 0h300v600H300z"/><path fill="#ce1126" d="M600 0h300v600H600z"/>
+  <g transform="translate(450 300)"><circle r="76" fill="none" stroke="#8b6b2e" stroke-width="10" stroke-dasharray="210 28"/><path fill="#6f7f32" d="M-55 42c33-13 53-39 62-78 20 17 25 43 13 68 25-13 45-11 60 5-25 34-69 53-118 42z"/><path fill="#8b5a2b" d="M-15-55c30 4 48 19 56 45L17 5c-6-19-17-30-39-34z"/><path fill="#b8862b" d="M-29-50c14-24 40-34 68-24-20 5-33 15-40 31z"/><path fill="none" stroke="#8b6b2e" stroke-width="9" stroke-linecap="round" d="M-63 58c34 25 83 28 126 2"/></g>
+</svg>

@@ -1,0 +1,79 @@
+(function () {
+  "use strict";
+
+  function detectRoot() {
+    if (window.JJ && window.JJ.rootUrl) return window.JJ.rootUrl;
+    var script = document.currentScript || document.querySelector('script[src*="layout-loader"]');
+    if (script && script.src) {
+      try {
+        return new URL("../../../", script.src);
+      } catch (_) {}
+    }
+    var path = window.location.pathname;
+    if (path.indexOf("/pages/") !== -1) {
+      return new URL("../../", window.location.href);
+    }
+    return new URL("./", window.location.href);
+  }
+
+  var rootUrl = detectRoot();
+  window.JJ = window.JJ || {};
+  window.JJ.rootUrl = rootUrl;
+  var templates = {
+    header: '<div class="container site-header__bar"><a href="{{ROOT}}index.html" class="brand" data-nav-link aria-label="Inicio del Despacho Jurídico y Trámites Migratorios J&amp;J"><img class="brand__logo" src="{{ROOT}}assets/img/brand-jj/logos/isotipo-jj-marco.png" width="72" height="72" alt="" aria-hidden="true"><span class="brand__name"><strong data-config-text="brand.shortName">J&amp;J TRÁMITES MIGRATORIOS</strong><span>Despacho Jurídico</span></span></a><button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú de navegación"><svg class="nav-toggle__icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="nav-toggle__icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div data-include="nav"></div></div>',
+    nav: '<nav class="site-nav" id="site-nav" data-site-nav aria-label="Navegación principal"><ul class="site-nav__list"><li><a href="{{ROOT}}index.html" data-nav-link>Inicio</a></li><li><a href="{{ROOT}}pages/core/despacho.html" data-nav-link>El Despacho</a></li><li><a href="{{ROOT}}pages/core/servicios.html" data-nav-link>Servicios</a></li><li><a href="{{ROOT}}pages/paises/index.html" data-nav-link>Países</a></li><li><a href="{{ROOT}}pages/core/preguntas-frecuentes.html" data-nav-link>Preguntas</a></li><li><a href="{{ROOT}}pages/core/contacto.html" data-nav-link>Contacto</a></li></ul><a class="site-nav__contact" data-config-href="contact.phones.0.tel" href="tel:+524251039697" data-analytics="phone_header"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.5 9 7.4 7.3 9.1a15 15 0 0 0 7.6 7.6l1.7-1.7 3.9 2.4-1.2 3c-.3.8-1.1 1.3-2 1.2C9.6 20.8 3.2 14.4 2.4 6.7c-.1-.9.4-1.7 1.2-2l3-1.2Z"/></svg><span data-config-text="contact.phones.0.display">425 103 9697</span></a></nav>',
+    footer: '<div class="container"><div class="site-footer__grid"><div class="site-footer__brand"><a class="brand" href="{{ROOT}}index.html" aria-label="Inicio de J&amp;J Trámites Migratorios"><img class="brand__logo" src="{{ROOT}}assets/img/brand-jj/logos/isotipo-jj-marco.png" width="72" height="72" alt="" aria-hidden="true"><span class="brand__name"><strong data-config-text="brand.shortName">J&amp;J TRÁMITES MIGRATORIOS</strong><span>Despacho Jurídico</span></span></a><p>Orientación jurídica en asuntos familiares y civiles, trámites migratorios, pasaportes y gestión consular para México, Estados Unidos, Cuba y Colombia.</p><p class="site-footer__professional" data-config-text="brand.professionalName">Lic. Juan José Cárdenas Solorio</p><p class="site-footer__address" data-config-text="location.displayAddress">Hidalgo Ote. 271, Centro, 61853 La Huacana, Michoacán</p></div><section class="site-footer__section" aria-labelledby="footer-nav-title"><h2 id="footer-nav-title">Navegación</h2><ul class="site-footer__list"><li><a href="{{ROOT}}index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></svg>Inicio</a></li><li><a href="{{ROOT}}pages/core/despacho.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>El Despacho</a></li><li><a href="{{ROOT}}pages/core/servicios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M9 6V4h6v2M3 11h18M10 11v2h4v-2"/></svg>Servicios</a></li><li><a href="{{ROOT}}pages/paises/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 2.5 3 15.5 0 18M12 3c-3 2.5-3 15.5 0 18"/></svg>Países</a></li><li><a href="{{ROOT}}pages/core/preguntas-frecuentes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1.2.9-1.2 1.8M12 17h.01"/></svg>Preguntas frecuentes</a></li><li><a href="{{ROOT}}pages/core/contacto.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 5h16v12H8l-4 3V5Z"/><path d="M8 9h8M8 13h5"/></svg>Contacto y mapa</a></li></ul></section><section class="site-footer__section" aria-labelledby="footer-services-title"><h2 id="footer-services-title">Servicios</h2><ul class="site-footer__list"><li><a href="{{ROOT}}pages/servicios/derecho-familiar.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 20c1-4 3.5-6 6-6s5 2 6 6M15 15c2.8 0 4.8 1.7 5.5 5"/></svg>Derecho familiar</a></li><li><a href="{{ROOT}}pages/servicios/derecho-civil.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v18M5 6h14M7 6l-4 7h8L7 6Zm10 0-4 7h8l-4-7ZM8 21h8"/></svg>Derecho civil</a></li><li><a href="{{ROOT}}pages/servicios/tramites-migratorios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 12h18M12 3c3 2.5 3 15.5 0 18M12 3c-3 2.5-3 15.5 0 18"/><circle cx="12" cy="12" r="9"/></svg>Trámites migratorios</a></li><li><a href="{{ROOT}}pages/servicios/acompanamiento-embajadas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m3 10 9-6 9 6M5 10v8m4-8v8m6-8v8m4-8v8M3 21h18"/></svg>Acompañamiento consular</a></li><li><a href="{{ROOT}}pages/servicios/pasaportes.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="11" r="3"/><path d="M9 11h6M12 8c1 2 1 4 0 6M8 17h8"/></svg>Pasaportes</a></li></ul></section><section class="site-footer__section" aria-labelledby="footer-legal-title"><h2 id="footer-legal-title">Legal</h2><ul class="site-footer__list"><li><a href="{{ROOT}}pages/legal/aviso-privacidad.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4M9 11h6M9 15h6"/></svg>Aviso de privacidad</a></li><li><a href="{{ROOT}}pages/legal/terminos-condiciones.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4"/></svg>Términos y condiciones</a></li><li><a href="{{ROOT}}pages/legal/politicas-servicio.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8.1-7 10-4.2-1.9-7-5.4-7-10V6l7-3Z"/><path d="m8.8 12 2.1 2.1 4.4-4.5"/></svg>Políticas de servicio</a></li></ul><p class="site-footer__legal-note">La orientación no garantiza aprobaciones, citas ni resoluciones de autoridades.</p></section><section class="site-footer__section site-footer__contact" aria-labelledby="footer-contact-title"><h2 id="footer-contact-title">Contacto directo</h2><ul class="site-footer__list"><li><span class="site-footer__schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span data-config-text="schedule.full">Lun - Vie: 9:00 a 18:00 hrs</span></span></li><li><a data-config-href="contact.phones.0.tel" href="tel:+524251039697"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10.5 21 3 13.5 3 6a2 2 0 0 1 2-2Z"/></svg><span data-config-text="contact.phones.0.display">425 103 9697</span></a></li><li><a data-config-href="contact.phones.1.tel" href="tel:+524251031294"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10.5 21 3 13.5 3 6a2 2 0 0 1 2-2Z"/></svg><span data-config-text="contact.phones.1.display">425 103 1294</span></a></li><li><a data-config-href="contact.email" data-prefix="mailto:" href="mailto:lic.j.j.tramites.mig@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>Correo electrónico</a></li><li><a data-config-href="location.mapsUrl" href="https://maps.app.goo.gl/RT4tmzjG8fqX5W6o7?g_st=atm" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Google Maps</a></li></ul><h3>Redes oficiales</h3><div class="site-footer__social" aria-label="Redes oficiales y canales de contacto"><a href="https://www.facebook.com/share/1C5XV5uBvW/" target="_blank" rel="noopener noreferrer" aria-label="Facebook principal de J&amp;J"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.4-3.2h-3.2V7.7c0-.9.3-1.6 1.7-1.6H17V3.2c-.3 0-1.3-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.4v2.4H7.5V13h2.8v8h3.4Z"/></svg></a><a href="https://www.facebook.com/share/1KRgi5VjQN/" target="_blank" rel="noopener noreferrer" aria-label="Segundo perfil de Facebook de J&amp;J"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.4-3.2h-3.2V7.7c0-.9.3-1.6 1.7-1.6H17V3.2c-.3 0-1.3-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.4v2.4H7.5V13h2.8v8h3.4Z"/></svg></a><a data-config-href="contact.phones.0.whatsapp" href="https://wa.me/524251039697" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de J&amp;J"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 1 1-3.8-7.1"/><path d="M8.5 9.2c.4 3.1 2.9 5.6 6 6"/></svg></a><a href="mailto:lic.j.j.tramites.mig@gmail.com" aria-label="Correo de J&amp;J"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></a></div></section></div><div class="site-footer__bottom"><span>© <span data-current-year></span> J&amp;J Trámites Migratorios · Despacho Jurídico</span><span>Atención en México, Estados Unidos, Cuba y Colombia</span></div></div>',
+    "cta-contact": '<div class="container"><div class="cta-contact"><div class="cta-contact__grid"><div><p class="eyebrow eyebrow--light">Atención directa</p><h2>Conversemos para definir el siguiente paso.</h2><p>Una primera conversación permite conocer tu situación y precisar el alcance de la orientación.</p></div><div class="cta-contact__actions"><a class="btn btn--whatsapp cta-contact__primary" data-config-href="contact.phones.0.whatsapp" href="https://wa.me/524251039697" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 1 1-3.8-7.1"/><path d="M8.5 9.2c.4 3.1 2.9 5.6 6 6"/></svg>WhatsApp</a><div class="cta-contact__secondary"><a class="btn btn--outline" data-config-href="contact.phones.0.tel" href="tel:+524251039697"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10.5 21 3 13.5 3 6a2 2 0 0 1 2-2Z"/></svg>Llamar al <span data-config-text="contact.phones.0.display">425 103 9697</span></a><a class="btn btn--outline" href="mailto:lic.j.j.tramites.mig@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>Enviar correo</a></div></div></div></div></div>',
+    "whatsapp-float": '<a class="whatsapp-float" data-config-href="contact.phones.0.whatsapp" href="https://wa.me/524251039697" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp al número principal anunciado"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 1 1-3.8-7.1"/><path d="M13 3.6c2.7.9 4.9 3.1 5.8 5.8"/><path d="M8.5 9.5c.3 2.6 2.4 4.7 5 5"/></svg></a>'
+  };
+
+  function rootToken() { return rootUrl.href; }
+
+  function activePath(href) {
+    try {
+      var target = new URL(href, rootUrl).pathname.replace(/index\.html$/, "");
+      var current = window.location.pathname.replace(/index\.html$/, "");
+      if (target === current || (target !== rootUrl.pathname && current.indexOf(target) === 0)) return true;
+      if (target.endsWith("/pages/core/servicios.html") && current.indexOf("/pages/servicios/") !== -1) return true;
+      return target.endsWith("/pages/paises/") && current.indexOf("/pages/paises/") !== -1;
+    } catch (_) { return false; }
+  }
+
+  function mount(node, html) {
+    node.innerHTML = html.replaceAll("{{ROOT}}", rootToken());
+    node.querySelectorAll("[data-nav-link]").forEach(function (link) {
+      if (activePath(link.href)) link.setAttribute("aria-current", "page");
+    });
+    if (window.JJ && window.JJ.hydrateInstitution) window.JJ.hydrateInstitution(node);
+    return Promise.all(Array.from(node.querySelectorAll("[data-include]")).map(include));
+  }
+
+  function include(node) {
+    var name = node.dataset.include;
+    if (!name) return Promise.resolve();
+    if (window.location.protocol === "file:") {
+      return mount(node, templates[name] || "");
+    }
+    var componentUrl = new URL("components/" + name + ".html", rootUrl);
+    componentUrl.searchParams.set("v", "20261025-9");
+    return fetch(componentUrl.href)
+      .then(function (response) { if (!response.ok) throw new Error(String(response.status)); return response.text(); })
+      .then(function (html) { return mount(node, html); })
+      .catch(function () { return mount(node, templates[name] || ""); });
+  }
+
+  function init() {
+    Promise.all(Array.from(document.querySelectorAll("[data-include]")).map(include))
+      .then(function () { document.dispatchEvent(new CustomEvent("jj:layout-ready")); });
+  }
+
+  if (!document.querySelector("script[data-jj-marketing]")) {
+    var marketing = document.createElement("script");
+    marketing.src = new URL("assets/js/core/marketing.js", rootUrl).href;
+    marketing.defer = true;
+    marketing.dataset.jjMarketing = "true";
+    document.head.appendChild(marketing);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
+  else init();
+})();

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1235 650" role="img" aria-labelledby="title desc">
+  <title id="title">Bandera de Estados Unidos</title>
+  <desc id="desc">Trece franjas rojas y blancas con cantón azul y cincuenta estrellas blancas.</desc>
+  <path fill="#fff" d="M0 0h1235v650H0z"/><path fill="#b22234" d="M0 0h1235v50H0zm0 100h1235v50H0zm0 100h1235v50H0zm0 100h1235v50H0zm0 100h1235v50H0zm0 100h1235v50H0zm0 100h1235v50H0z"/><path fill="#3c3b6e" d="M0 0h494v350H0z"/>
+  <defs><path id="s" fill="#fff" d="m0-10 2.35 7.24h7.61L3.8 1.71l2.35 7.24L0 4.47l-6.15 4.48L-3.8 1.7l-6.16-4.47h7.61z"/><g id="row6"><use href="#s"/><use href="#s" x="82"/><use href="#s" x="164"/><use href="#s" x="246"/><use href="#s" x="328"/><use href="#s" x="410"/></g><g id="row5"><use href="#s" x="41"/><use href="#s" x="123"/><use href="#s" x="205"/><use href="#s" x="287"/><use href="#s" x="369"/></g></defs>
+  <g transform="translate(32 29)"><use href="#row6"/><use href="#row5" y="36"/><use href="#row6" y="72"/><use href="#row5" y="108"/><use href="#row6" y="144"/><use href="#row5" y="180"/><use href="#row6" y="216"/><use href="#row5" y="252"/><use href="#row6" y="288"/></g>
+</svg>

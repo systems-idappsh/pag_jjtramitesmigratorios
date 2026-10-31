@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /.git/
+Disallow: /.vscode/
+
+Sitemap: https://jjtramitesmigratorios.com/sitemap.xml
